@@ -1,0 +1,5 @@
+<div class="container my-40 px-10">
+    <app-header [maintitle]="mainTitle" [subtitle]='subTitle'></app-header>
+    <app-issuerecords [issues]="issueList"></app-issuerecords>
+    <app-issueentry (addIssue)="addIssueEntry($event)"></app-issueentry>
+</div>

@@ -1,0 +1,33 @@
+<div *ngIf="isError" class="row mb-50" id="errorcontainer">
+  <div class="column column-6">
+    <p style="color:red">All Fields are required</p>
+  </div>
+</div>
+<div class="row mb-20">
+  <div class="column column-6">
+    <form [formGroup]="issueEntryForm" (ngSubmit)="onSubmit()" id="entryform">
+      <label for="issueDescription">
+        <span class="mr-20">Issue Description</span>
+        <input id="issueDescription" type="text" formControlName="description" />
+      </label>
+      <label for="issueSeverity">
+        <span class="mr-20">Severity</span>
+        <select class="p-20" formControlName="severity" id="issueSeverity">
+          <option [ngValue]="null" disabled>Choose Severity</option>
+          <option *ngFor="let item of severity" [ngValue]="item.name">{{item.name}}</option>
+        </select>
+      </label>
+      <label for="issueStatus">
+        <span class="mr-20">Status</span>
+        <div id ="statusgroup">
+          <div class="groupitem mr-20"><input type="radio" class="mr-10" value="open" formControlName="status">Open</div>
+          <div class="groupitem mr-20"><input type="radio" class="mr-10" value="in progress" formControlName="status">In Progress</div>
+          <div class="groupitem mr-20"><input type="radio" class="mr-10" value="closed" formControlName="status">Closed</div>
+        </div>
+      </label>
+      <div class="buttoncontainer">
+        <button type="submit" >Add</button>
+      </div>
+    </form>
+  </div>
+</div>

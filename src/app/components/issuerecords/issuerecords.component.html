@@ -1,0 +1,27 @@
+<div class="row mb-20">
+  <div class="column column-12">
+    <ng-container *ngIf="issues.length;else noIssues">
+    <table border="1">
+      <thead>
+        <tr>
+          <td class="p-5 ml-5" align="center">Issue Description</td>
+          <td class="p-5 ml-5">Severity</td>
+          <td class="p-5 ml-5" align="center">Status</td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let issue of issues;let i = index">
+          <td class="p-5 ml-5">{{issue?.description}}</td>
+          <td class="p-5 ml-5">{{issue?.severity}}</td>
+          <td align="center" class="p-5 ml-5" [ngClass]="{open: issue?.status === 'open',closed: issue?.status === 'closed',
+          progress: issue?.status === 'in progress'}">
+            {{issue?.status}}
+          </td>
+      </tbody>
+    </table>
+    </ng-container>
+    <ng-template #noIssues>
+        <h3>No Nore Issues Now</h3>
+    </ng-template>
+  </div>
+</div>
