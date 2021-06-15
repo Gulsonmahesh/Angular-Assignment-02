@@ -1,0 +1,18 @@
+@import '../../mixins.scss';
+
+:host {
+
+  .open {
+    background-color: blue;
+    color: white;
+  }
+
+  .closed {
+    color: green;
+  }
+
+  .progress {
+    color: yellow;
+    background-color: black;
+  }
+}
