@@ -1,6 +1,10 @@
 <div class="row mb-20">
   <div class="column column-12">
-    <h1 class="mb-20">{{maintitle}}</h1>
+    <!-- <h1 class="mb-20">{{maintitle}}</h1> -->
     <h2>{{subtitle}}</h2>
+    <ul >
+      <li><a routerLink="/about" routerLinkActive="active-link" [routerLinkActiveOptions]="{exact: true}">About</a></li>
+      <li><a routerLink="/issues" routerLinkActive="active-link" [routerLinkActiveOptions]="{exact: true}">Issues</a></li>
+    </ul>
   </div>
 </div>

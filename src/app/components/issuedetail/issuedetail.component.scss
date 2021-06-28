@@ -1,0 +1,15 @@
+:host {
+  .text-bold {
+    font-size: 19px;
+    font-weight: 700;
+    color: lightgrey;
+  }
+  li {
+    list-style: none;
+    span {
+      &:last-child {
+        margin-left: 20px;
+      }
+    }
+  }
+}

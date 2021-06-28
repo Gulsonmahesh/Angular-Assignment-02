@@ -1,5 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { IssueService } from '../../services/issue.service';
 
 @Component({
   selector: 'app-issueentry',
@@ -8,15 +9,14 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 })
 export class IssueentryComponent implements OnInit {
 
-  constructor() { }
+  constructor(private issueService: IssueService) { }
   severity = [{name: 'critical'},{name: 'major'},{name: 'minor'}];
   status   = ['open', 'closed', 'in progress'];
   isError = false;
   issueEntryForm:any = null
+  @Output() issueEntry = new EventEmitter();
 
-  @Output() addIssue = new EventEmitter<any>();
-
-  ngOnInit(): void {
+   ngOnInit(): void {
     this.myFormValues();
   }
 
@@ -27,16 +27,22 @@ export class IssueentryComponent implements OnInit {
       status: new FormControl(null, Validators.required)
     })
   }
-
+  addIssue(formValues: any) {
+    this.issueService.addIssue(formValues).subscribe(
+      data=> {
+        this.issueEntry.emit(formValues);
+      },
+      error => {}
+    );
+  }
   onSubmit() {
-    if (this.issueEntryForm.value.description && this.issueEntryForm.value.severity &&
-      this.issueEntryForm.value.status) {
-        this.isError = false;
-        this.addIssue.emit(this.issueEntryForm.value);
-        this.myFormValues();
-        this.issueEntryForm.reset(this.issueEntryForm.value);
-      } else {
-        this.isError = true;
-      }
+    if (this.issueEntryForm.value.description && this.issueEntryForm.value.severity && this.issueEntryForm.value.status) {
+      this.isError = false;
+      this.addIssue(this.issueEntryForm.value);
+      this.myFormValues();
+      this.issueEntryForm.reset(this.issueEntryForm.value);
+    } else {
+      this.isError = true;
+    }
   }
 }

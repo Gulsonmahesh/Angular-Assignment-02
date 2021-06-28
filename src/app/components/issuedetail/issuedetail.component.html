@@ -1,0 +1,16 @@
+<div class="row mb-20">
+  <div class="column column-12">
+    <ul *ngIf="issueDatail">
+      <li><span class="text-bold">Issue name:</span><span>{{issueDatail.description}}</span></li>
+      <li><span class="text-bold">severity: </span><span>{{issueDatail.severity}}</span></li>
+      <li><span class="text-bold">Issue status: </span><span>{{issueDatail.status}}</span></li>
+    </ul>
+  </div>
+</div>
+
+<div class="row mb-20">
+  <div class="column column-12">
+    <button (click)="gobacktoissuelist()">Back</button>
+  </div>
+</div>
+

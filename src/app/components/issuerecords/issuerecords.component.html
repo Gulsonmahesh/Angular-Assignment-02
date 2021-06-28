@@ -1,6 +1,6 @@
-<div class="row mb-20">
+<div class="row mb-20" *ngIf="!loadError">
   <div class="column column-12">
-    <ng-container *ngIf="issues.length;else noIssues">
+    <ng-container *ngIf="issues && issues.length;">
     <table border="1">
       <thead>
         <tr>
@@ -11,7 +11,9 @@
       </thead>
       <tbody>
         <tr *ngFor="let issue of issues;let i = index">
-          <td class="p-5 ml-5">{{issue?.description}}</td>
+          <td class="p-5 ml-5">
+            <a href="/issuedetail/{{issue.id}}">{{issue?.description}}</a>
+          </td>
           <td class="p-5 ml-5">{{issue?.severity}}</td>
           <td align="center" class="p-5 ml-5" [ngClass]="{open: issue?.status === 'open',closed: issue?.status === 'closed',
           progress: issue?.status === 'in progress'}">
@@ -20,8 +22,16 @@
       </tbody>
     </table>
     </ng-container>
-    <ng-template #noIssues>
-        <h3>No Nore Issues Now</h3>
-    </ng-template>
+    <ng-container *ngIf="issues && !issues.length">
+      <h3>No Nore Issues Now</h3>
+    </ng-container>
   </div>
 </div>
+
+<div class="row mb-20" *ngIf="loadError">
+  <div class="column column-12">
+    {{errorMessage}}
+  </div>
+</div>
+
+<app-issueentry (issueEntry)="addIssueEntry($event)"></app-issueentry>
